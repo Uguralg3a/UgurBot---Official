@@ -1,4 +1,3 @@
-const translate = require('@iamtraction/google-translate')
 const { EmbedBuilder, PermissionsBitField } = require('discord.js')
 const client = require('../../index')
 const ms = require('ms')

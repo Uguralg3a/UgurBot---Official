@@ -58,12 +58,13 @@ module.exports = {
     const convertedDay = suffixes(day);
     const convertedMonth = months[month]
     const birthdayString = `${convertedDay}${convertedMonth}`
-    Schema.findOne({User: interaction.user.id}, async(err, data) => {
+    Schema.findOne({User: interaction.user.id, Guild: interaction.guild.id}, async(err, data) => {
         if(data) {
             data.birthday = birthdayString;
             data.save();
         } else {
             new Schema({
+                Guild: interaction.guild.id,
                 User: interaction.user.id,
                 Birthday: birthdayString
             }).save();

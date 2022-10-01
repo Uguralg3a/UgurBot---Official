@@ -19,7 +19,7 @@ module.exports= {
     ],
     
     run : async(client, interaction) => {
-        if(!interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)) return message.channel.send('You do not have permission to use this command.')
+        if(!interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)) return interaction.reply('You do not have permission to use this command.')
         const user = interaction.options.getUser('user') 
         if(!user) return interaction.reply('Member is not found.')
         const role = interaction.guild.roles.cache.find(role => role.name.toLowerCase() === 'muted')

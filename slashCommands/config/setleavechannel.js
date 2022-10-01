@@ -2,8 +2,8 @@ const Schema = require('../../models/welcomechannel')
 const {PermissionsBitField} = require('discord.js')
 
 module.exports = {
-  name: 'setchannel',
-  description: 'Sets the welcome channel',
+  name: 'setleavechannel',
+  description: 'Sets the leave channel',
   options: [
     {
         name: "channel",
@@ -18,17 +18,18 @@ module.exports = {
     const channel = interaction.options.getChannel('channel')
     if (!channel) return interaction.reply({ content: 'Please specify a channel!'})
 
+
     Schema.findOne({ Guild: interaction.guild.id}, async (err, data) => {
-      if (data) {
-        data.Channel = channel.id
-        data.save()
-      } else {
-        new Schema ({ 
-          Guild: interaction.guild.id,
-          Channel: channel.id
-        }).save()
-      }
-      interaction.reply({ content: `${channel} has been set as your welcome channel`})
-    })
+        if (data) {
+          data.Channel = channel.id
+          data.save()
+        } else {
+          new Schema ({ 
+            Guild: interaction.guild.id,
+            Channel: channel.id
+          }).save()
+        }
+        interaction.reply({ content: `${channel} has been set as your leave channel`})
+      })
+    }
   }
-}

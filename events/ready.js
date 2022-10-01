@@ -4,7 +4,7 @@ const chalk = require('chalk');
 
 client.on("ready", () => {
 	const activities = [
-		{ name: `${client.guilds.cache.size} Servers`, type: ActivityType.Listening },
+		{ name: `${client.guilds.cache.size} / 100 Servers`, type: ActivityType.Listening },
 		{ name: `${client.channels.cache.size} Channels`, type: ActivityType.Playing },
 		{ name: `${client.users.cache.size} Users`, type: ActivityType.Watching },
 	];

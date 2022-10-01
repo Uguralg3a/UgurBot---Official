@@ -24,7 +24,7 @@ module.exports = {
 	run: async (client, interaction) => {
         const user = interaction.options.getUser('user');
 
-        Schema.findOne({ User: user.id}, async ( err, data) => {
+        Schema.findOne({ User: user.id, Guild: interaction.guild.id }, async ( err, data) => {
             if(!data) return interaction.reply("Dieses Mitglied hat noch kein Geburtstag festgelegt!")
             interaction.reply(`${user} hat am ${data.Birthday} geburtstag!`)
         })
