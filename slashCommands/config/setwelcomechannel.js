@@ -7,7 +7,7 @@ module.exports = {
     {
         name: "channel",
         description: "The channel",
-        type: 8,
+        type: 'Channel',
         required: true
     }
   ],
