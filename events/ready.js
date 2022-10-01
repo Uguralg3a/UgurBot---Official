@@ -7,12 +7,9 @@ client.on("ready", () => {
 		{ name: `${client.guilds.cache.size} Servers`, type: ActivityType.Listening },
 		{ name: `${client.channels.cache.size} Channels`, type: ActivityType.Playing },
 		{ name: `${client.users.cache.size} Users`, type: ActivityType.Watching },
-		{ name: `Minecraft`, type: ActivityType.Playing }
 	];
 	const status = [
 		'online',
-		'dnd',
-		'idle'
 	];
 	let i = 0;
 	setInterval(() => {

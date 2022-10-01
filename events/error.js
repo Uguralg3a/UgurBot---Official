@@ -1,5 +1,6 @@
-const channel = client.channels.cache.get('1025687301751312445')
 const client = require('..');
+const channel = client.channels.cache.get('1025687301751312445')
+
 
 
 client.on('message',message => {
