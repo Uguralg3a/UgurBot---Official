@@ -1,5 +1,6 @@
 const translate = require('@iamtraction/google-translate')
 const { EmbedBuilder, PermissionsBitField } = require('discord.js')
+const Schema = require('../../models/levelsystem')
 const client = require('../../index')
 const ms = require('ms')
 const {hostedBy, everyoneMention} = require('../../config.json');
@@ -42,8 +43,11 @@ module.exports= {
     /*.setColor('ff0000')
     .setDescription(`**LEVEL** - ${User.level}\n**Position** - ${User.position}\n**XP** - ${User.xp}/${newxp}`)*/
     .setImage('attachment://RankCard.png')
-  
-    interaction.reply({/* embeds: [embed],*/ files: [{ attachment: data, name: 'RankCard.png'}] })
+    Schema.findOne({ Guild: interaction.guild.id, Feature: true}, async (e, data) => {
+        if (!data) return
+            interaction.reply({/* embeds: [embed],*/ files: [{ attachment: data, name: 'RankCard.png'}] })
+    
+    })
   })
   }
 }
