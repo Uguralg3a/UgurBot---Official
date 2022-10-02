@@ -4,7 +4,7 @@
 		"COOLDOWN_MESSAGE": "You are on `<duration>` cooldown!",
 		"NO_PERM": "You dont have the right Permissions, to use this Command!"
 	},
-    "mongo": "mongodb+srv://KuerbisKaktus:Uguralgul1@ibtonrib2.rgz6v.mongodb.net/?retryWrites=true&w=majority",
+    "mongo": "Your Mongo",
 	"hostedBy": true,
 	"everyoneMention": false,
 	"devId": "942445182639546368"
