@@ -32,7 +32,7 @@ module.exports= {
         const eembed = new EmbedBuilder()
         .setTitle("New Poll")
         .setDescription(description)
-        let msgEmbed = await channel.send(eembed)
+        let msgEmbed = await channel.send({embeds: [eembed]})
         await msgEmbed.react('👍')
         await msgEmbed.react('👎')
     }
