@@ -8,7 +8,7 @@ client.on('guildCreate', (guild) => {
         if(
             channel.type === "text" &&
             !channelToSend &&
-            channel.permissionsFor(guild.me).has(PermissionsBitField.Flags.SendMessages)
+            channel.permissionsFor(guild.me).has("SEND_MESSAGES")
         )
         channelToSend = channel;
     })
