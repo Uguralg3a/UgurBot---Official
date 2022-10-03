@@ -25,17 +25,17 @@ module.exports= {
         const id = interaction.options.getString('id')
         if(!id) return message.channel.send('Bitte Gebe eine MessageID an!')
 
-        const giveaway = client.giveaways.giveaways.find((g) => g.messageID === id)
-        if(!giveaway) return interaction.reply('Giveaway konnte nicht gefunden werden')
+       // const giveaway = client.giveaways.giveaways.find((g) => g.messageID === id)
+        //if(!giveaway) return interaction.reply('Giveaway konnte nicht gefunden werden')
 
-        client.giveaways.reroll(giveaway.messageID)
+        client.giveaways
+            .reroll(id)
             .then(() => {
-                interaction.reply("Giveaway rerolled");
+                interaction.reply({content: 'Success! Giveaway rerolled!', ephemeral: true});
             })
-            .catch(err => {
-                console.log(err)
-            })
-    
-        
+            .catch((err) => {
+                interaction.reply({content: `An error has occurred, please check and try again.\n\`${err}\``, ephemeral: true});
+            });
     }
+        
 }

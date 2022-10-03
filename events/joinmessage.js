@@ -1,14 +1,14 @@
 const client = require("../index")
-const {EmbedBuilder, PermissionsBitField} = require('discord.js')
+const {EmbedBuilder, PermissionsBitField, ChannelType} = require('discord.js')
 
 client.on('guildCreate', (guild) => {
     let channelToSend;
 
     guild.channels.cache.forEach((channel) => {
         if(
-            channel.type === "text" &&
+            channel.type === ChannelType.GuildText &&
             !channelToSend &&
-            channel.permissionsFor(guild.me).has("SEND_MESSAGES")
+            channel.permissionsFor(guild.members.me).has(PermissionsBitField.Flags.SendMessages)
         )
         channelToSend = channel;
     })
@@ -23,5 +23,5 @@ client.on('guildCreate', (guild) => {
         value: "[Here is a link lol](https://discord.gg/a6thTVjCE4)"
     })
 
-    channelToSend.send(embed)
+    channelToSend.send({embeds: [embed]})
 })

@@ -25,16 +25,16 @@ module.exports= {
         const id = interaction.options.getString('id')
         if(!id) return message.channel.send('Bitte Gebe eine MessageID an!')
 
-        const giveaway = client.giveaways.giveaways.find((g) => g.messageID === id)
-        if(!giveaway) return interaction.reply('Giveaway konnte nicht gefunden werden')
+       // const giveaway = client.giveaways.giveaways.find((g) => g.messageID == id)
+        //if(!giveaway) return interaction.reply('Giveaway konnte nicht gefunden werden')
 
-        client.giveaways.edit(giveaway.messageID, {
+        client.giveaways.edit(id, {
             setEndTimestamp: Date.now()
         }).then(()  => {
-            interaction.reply(`Giveaway wird in weniger als ${client.giveaway.options.updateCountdownEvery / 1000} Sekunden enden!`)
+            interaction.reply({content: `Success! Giveaway updated`, ephemeral: true});
         }).catch(err => {
             console.log(err)
-            interaction.reply('An error occured')
+            interaction.reply({content: 'An error occured', ephemeral: true})
         })
         
     }
