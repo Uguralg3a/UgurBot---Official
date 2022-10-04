@@ -1,6 +1,6 @@
 const schema = require('../../models/autorole')
 const {PermissionsBitField} = require('discord.js')
-const {noperm, noroleforautorolementioned, autoroleisalreadyenabled, autoroleenabled} = reqiure("../../messages.json")
+const {noperm, noroleforautorolementioned, autoroleisalreadyenabled, autoroleenabled} = require("../../messages.json")
 
 
 module.exports ={
