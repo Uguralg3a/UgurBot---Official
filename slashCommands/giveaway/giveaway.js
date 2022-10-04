@@ -1,9 +1,10 @@
 const { EmbedBuilder, PermissionsBitField } = require('discord.js')
 const client = require('../../index')
 const ms = require('ms')
-const {hostedBy, everyoneMention} = require('../../config.json');
+const {hostedBy, everyoneMention, giveawayhostedby} = require('../../config.json');
 
 const { ApplicationCommandType } = require('discord.js')
+const {giveawaynochannel, giveawaynotime, giveawaynoamountofwinners, giveawaynoprice, giveawaytimeremaining, giveawayreacttoplay, giveawaywinmessage, giveawayfooter, giveawaynowinner, giveawaywinners, giveawayendat, noperm} = require('../../messages.json')
 
 module.exports= {
     name : 'giveaway',
@@ -39,20 +40,20 @@ module.exports= {
     ],
     
     run : async(client, interaction) => {
-        if(!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) return interaction.reply('You dont have manage messages permission.')
+        if(!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) return interaction.reply(noperm)
         
         const channel = interaction.options.getChannel('channel')
-        if(!channel) return interaction.reply('Please specify a channel')
+        if(!channel) return interaction.reply(giveawaynochannel)
 
         const dauer = interaction.options.getString('zeit')
-        if(!dauer) return interaction.reply('please enter a valid duration')
+        if(!dauer) return interaction.reply(giveawaynotime)
 
         const winners = interaction.options.getInteger('gewinner')
-        if(!winners) return interaction.reply('Please specify an amount of winners')
+        if(!winners) return interaction.reply(giveawaynoamountofwinners)
     
 
         const prize = interaction.options.getString('preis')
-        if(!prize) return interaction.reply('Please sepcify a prize to win')
+        if(!prize) return interaction.reply(giveawaynoprice)
 
         client.giveaways.start(channel, {
             duration : ms(dauer),
@@ -62,14 +63,14 @@ module.exports= {
             messages: {
                 giveaway: (everyoneMention ? "@everyone\n\n" : '') + "Giveaway",
                 giveawayEnd: (everyoneMention ? "@everyone\n\n" : '') + "Giveaway Vorbei",
-                timeRemaining: "Zeit verbliebend **{duration}**",
-                inviteToParticipate: "Reagiere mit 🎉 um dem Giveaway beizutreten.",
-                winMessage: "Herzlichen Glückwunsch {winners}, du hast das Giveaway gewinnen!",
-                embedFooter: "Giveaway Zeit!",
-                noWinner: "Ich konnte keinen Gewinner Finden",
-                hostedBy: `Erstellt von ${interaction.author}`,
-                winners: "Gewinner",
-                endedAt: 'Endet in',
+                timeRemaining: giveawaytimeremaining.replace("<duration>", "{duration}"),
+                inviteToParticipate: giveawayreacttoplay,
+                winMessage: giveawaywinmessage.replace("<winners>", "{winners}"),
+                embedFooter: giveawayfooter,
+                noWinner: giveawaynowinner,
+                hostedBy: giveawayhostedby.replace("<user>", interaction.author),
+                winners: giveawaywinners,
+                endedAt: giveawayendat,
                 units: {
                     seconds: "Sekunden",
                     minutes: "Minuten",

@@ -2,6 +2,7 @@ const translate = require('@iamtraction/google-translate')
 const { EmbedBuilder, PermissionsBitField } = require('discord.js')
 const client = require('../../index')
 const { ApplicationCommandType } = require('discord.js')
+const {warnsusernotfound, warntimenotgiven, muterolenotfound, muterolecreated, unmutednow, memberalreadymuted, noperm} = require('../../messages.json')
 
 module.exports= {
     name : 'tempmute',
@@ -25,15 +26,15 @@ module.exports= {
     ],
     
     run : async(client, interaction) => {
-        if(!interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)) return message.channel.send('You do not have permission to use this command.')
+        if(!interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)) return interaction.reply(noperm)
         const user = interaction.options.getUser('user') 
         const time = interaction.options.getString('time')
-        if(!user) return interaction.reply('Member is not found.')
-        if(!time) return interaction.reply('Please specify a time.')
+        if(!user) return interaction.reply(warnsusernotfound)
+        if(!time) return interaction.reply(warntimenotgiven)
         const role = interaction.guild.roles.cache.find(role => role.name.toLowerCase() === 'muted')
         if(!role) {
             try {
-                interaction.reply('Muted role is not found, attempting to create muted role.')
+                interaction.reply(muterolenotfound)
 
                 let muterole = await interaction.guild.roles.create({
                     data : {
@@ -47,19 +48,19 @@ module.exports= {
                         ADD_REACTIONS: false
                     })
                 });
-                interaction.reply('Muted role has sucessfully been created.')
+                interaction.reply(muterolecreated)
             } catch (error) {
                 console.log(error)
             }
         };
         let role2 = interaction.guild.roles.cache.find(r => r.name.toLowerCase() === 'muted')
-        if(user.roles.cache.has(role2.id)) return interaction.reply(`${Member.displayName} has already been muted.`)
+        if(user.roles.cache.has(role2.id)) return interaction.reply(memberalreadymuted.replace('<user>', Member.displayName))
         await user.roles.add(role2)
-        interaction.reply(`${user.displayName} is now muted.`)
+        interaction.reply(mutedmember.replace('<user>', Member.displayName))
 
         setTimeout(async () => {
             await user.roles.remove(role2)
-            interaction.reply(`${Member.displayName} is now unmuted`)
+            interaction.reply(unmutednow.replace("<user>", Member.displayName))
         }, ms(time))
     }
 }

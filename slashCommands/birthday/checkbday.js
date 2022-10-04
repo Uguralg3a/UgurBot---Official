@@ -1,5 +1,6 @@
 const { ApplicationCommandType } = require('discord.js');
 const Schema = require('../../models/birthday')
+const {nobirthday, userbirthday} = require("../../messages.json")
 
 
 module.exports = {
@@ -25,8 +26,8 @@ module.exports = {
         const user = interaction.options.getUser('user');
 
         Schema.findOne({ User: user.id, Guild: interaction.guild.id }, async ( err, data) => {
-            if(!data) return interaction.reply("Dieses Mitglied hat noch kein Geburtstag festgelegt!")
-            interaction.reply(`${user} hat am ${data.Birthday} geburtstag!`)
+            if(!data) return interaction.reply(nobirthday)
+            interaction.reply(userbirthday.replace('<user>', user).replace('<birthday>', data.Birthday))
         })
 	}
 };

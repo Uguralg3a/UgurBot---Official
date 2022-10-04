@@ -1,5 +1,6 @@
 const RoleSchema = require('../models/autorole')
 const client = require('../index')
+const { autoroledeletedby } = require('../messages.json')
 
 client.on('guildMemberAdd', async (member, guild) => {
   RoleSchema.findOne({ Guild: member.guild.id }, async (err, data) => {
@@ -7,7 +8,7 @@ client.on('guildMemberAdd', async (member, guild) => {
     if (data) {
       const role = member.guild.roles.cache.find(role => role.id == data.Role)
       if (!role) {
-        console.log(`Auto Role: ${data.Role} was deleted from ${member.guild.id}`)
+        console.log(autoroledeletedby.replace("<role>", data.Role).replace("<guildid>", member.guild.id))
         return data.delete()
       }
       member.roles.add(role.id)

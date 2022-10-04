@@ -1,6 +1,6 @@
 const Schema = require('../../models/autochannel')
 const {PermissionsBitField} = require('discord.js')
-
+const {nochannelforautochannel, savedautochannel} = require('../../messages.json')
 module.exports = {
   name: 'setautochannel',
   description: 'Sets the voice channel to create own channel',
@@ -16,7 +16,7 @@ module.exports = {
     if(!interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)) return interaction.reply('You do not have permission to use this command.')
 
     const channel = interaction.options.getChannel('channel')
-    if (!channel) return interaction.reply({ content: 'Please specify a channel!'})
+    if (!channel) return interaction.reply({ content: nochannelforautochannel})
 
 
     Schema.findOne({ Guild: interaction.guild.id}, async (err, data) => {
@@ -29,7 +29,7 @@ module.exports = {
             Channel: channel.id
           }).save()
         }
-        interaction.reply({ content: `${channel} has been set as your Auto channel`})
+        interaction.reply({ content: savedautochannel.replace("<channel>", channel)})
       })
     }
   }

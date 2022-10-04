@@ -1,5 +1,6 @@
 const { ApplicationCommandType } = require('discord.js');
 const Schema = require('../../models/birthday')
+const {bdaynoday, bdaynomonth, bdaynorightnumber, bdaywrongformat, bdaysavedas} = require('../../messages.json')
 
 
 module.exports = {
@@ -42,17 +43,17 @@ module.exports = {
 
 	     let [day, month] = split;
 
-    if(!day) return interaction.reply("Bitte gebe einen Tag an!")
-    if(!month) return interaction.reply("Bitte gebe einen Monat an!")
+    if(!day) return interaction.reply(bdaynoday)
+    if(!month) return interaction.reply(bdaynomonth)
 
     if(isNaN(day) || isNaN(month))
-    return interaction.reply("Das Datum das du angegeben hast ist keine Zahl!")
+    return interaction.reply(bdaynorightnumber)
 
     day = parseInt(day);
     month = parseInt(month);
 
-    if(!day || day > 31) return interaction.reply("Falsches Format!")
-    if(!month || month > 12) return interaction.reply("Falsches Format!")
+    if(!day || day > 31) return interaction.reply(bdaywrongformat)
+    if(!month || month > 12) return interaction.reply(bdaywrongformat)
 
     
     const convertedDay = suffixes(day);
@@ -71,7 +72,7 @@ module.exports = {
         }
     })
 
-    interaction.reply(`Gespeichert als ${birthdayString}`)
+    interaction.reply(bdaysavedas.replace("<birthday>", birthdayString))
 },
 }
 

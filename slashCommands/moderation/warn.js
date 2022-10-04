@@ -3,6 +3,7 @@ const { EmbedBuilder, PermissionsBitField } = require('discord.js')
 const client = require('../../index')
 const { ApplicationCommandType } = require('discord.js')
 const db = require('../../models/warns')
+const {noperm, warnsusernotfound, warnmessage} = require('../../messages.json')
 
 
 module.exports= {
@@ -26,9 +27,9 @@ module.exports= {
     ],
     
     run : async(client, interaction) => {
-        if(!interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)) return message.channel.send('You do not have permission to use this command.')
+        if(!interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)) return interaction.reply(noperm)
         const user = interaction.options.getUser('user') 
-        if(!user) return message.channel.send('User not found.')
+        if(!user) return message.channel.send(warnsusernotfound)
         const reason = interaction.options.getString('grund')
         db.findOne({ guildid: interaction.guild.id, user: user.id}, async(err, data) => {
             if(err) throw err;
@@ -59,7 +60,7 @@ module.exports= {
 
         const warnc = new EmbedBuilder()
         .setTitle("Warn")
-            .setDescription(`${user} wurde für ${reason} gewarnt!`)
+            .setDescription(warnmessage.replace("<user>", user).replace("<reason>", reason))
 
         /*user.send({
             embeds: [warnu]

@@ -3,6 +3,7 @@ const { EmbedBuilder, PermissionsBitField } = require('discord.js')
 const client = require('../../index')
 const { ApplicationCommandType } = require('discord.js')
 const db = require('../../models/warns')
+const {warnsusernotfound, warnsusernodata} = require('../../messages.json')
 
 
 module.exports= {
@@ -23,7 +24,7 @@ module.exports= {
     run : async(client, interaction) => {
         if(!interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)) return message.channel.send('You do not have permission to use this command.')
         const user = interaction.options.getUser('user') 
-        if(!user) return message.channel.send('User not found.')
+        if(!user) return message.channel.send(warnsusernotfound)
         db.findOne({ guildid: interaction.guild.id, user: user.id}, async(err, data) => {
 
             const e = new EmbedBuilder()
@@ -40,7 +41,7 @@ module.exports= {
                 }
                 )
             } else {
-                interaction.reply('User hat keine Daten!')
+                interaction.reply(warnsusernodata)
             }
 
         })

@@ -2,6 +2,7 @@ const translate = require('@iamtraction/google-translate')
 const { EmbedBuilder, PermissionsBitField } = require('discord.js')
 const client = require('../../index')
 const { ApplicationCommandType } = require('discord.js')
+const {kicknomember, kickedmember, noperm} = require('../../messages.json')
 
 module.exports= {
     name : 'kick',
@@ -19,10 +20,10 @@ module.exports= {
     ],
     
     run : async(client, interaction) => {
-        if(!interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)) return interaction.reply('You do not have permission to use this command.')
+        if(!interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)) return interaction.reply(noperm)
         const user = interaction.options.getUser('user') 
-        if(!user) return interaction.reply('Member is not found.')
+        if(!user) return interaction.reply(kicknomember)
         interaction.guild.members.kick(user)
-        interaction.reply({content: `Kicked ${user}`})
+        interaction.reply({content: kickedmember.replace("<user>", user )})
     }
 }

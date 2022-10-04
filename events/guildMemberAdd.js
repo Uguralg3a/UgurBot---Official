@@ -1,14 +1,15 @@
 const client = require('../index')
 const Schema = require('../models/welcomechannel')
 const { EmbedBuilder } = require('discord.js')
+const {welcomeembedtitle, welcomeembeddescription} = require('../messages.json')
 
 client.on('guildMemberAdd', async (member) => {
   Schema.findOne({ Guild: member.guild.id}, async (e, data) => {
     if (!data) return
     const user = member.user
     const embed = new EmbedBuilder()
-    .setTitle('New member has joined!')
-    .setDescription(`${user}, welcome to ${member.guild.name}`)
+    .setTitle(welcomeembedtitle)
+    .setDescription(welcomeembeddescription.replace("<user>", user).replace("<guildname>", member.guild.name))
     .setTimestamp()
 
     const channel = member.guild.channels.cache.get(data.Channel)
