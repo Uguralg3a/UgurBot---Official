@@ -1,9 +1,9 @@
-const Schema = require('../../models/leavechannel')
+const Schema = require('../../models/autochannel')
 const {PermissionsBitField} = require('discord.js')
 
 module.exports = {
-  name: 'setleavechannel',
-  description: 'Sets the leave channel',
+  name: 'setautochannel',
+  description: 'Sets the voice channel to create own channel',
   options: [
     {
         name: "channel",
@@ -29,7 +29,7 @@ module.exports = {
             Channel: channel.id
           }).save()
         }
-        interaction.reply({ content: `${channel} has been set as your leave channel`})
+        interaction.reply({ content: `${channel} has been set as your Auto channel`})
       })
     }
   }
