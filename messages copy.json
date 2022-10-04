@@ -60,5 +60,13 @@
     "autoroledeletedby": "Auto Role: <role> was deleted from <guildid>",
     "welcomeembedtitle": "New member has joined!",
     "welcomeembeddescription": "<user>, welcome to <guildname>",
-    "leavemessage": "<user> just left the server!"
+    "leavemessage": "<user> just left the server!",
+    "nodev": "Only my developer can use this command!",
+    "noblacklistmember": "Please specify someone to blacklist",
+    "alreadyblacklisted": "<usertag> is already blacklisted!",
+    "blacklistedsucessfully": "<usertag> has been succesfully blacklisted",
+    "blacklistedmessage": "**You are blacklisted from using my commands!**",
+    "noremoveblacklistuser": "Please specify someone to remove the blacklist",
+    "removedblacklist": "<usertag> has been removed from the blacklist.",
+    "notblacklisted": "<usertag> is not blacklisted."
 }

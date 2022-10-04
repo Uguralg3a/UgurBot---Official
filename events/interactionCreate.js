@@ -2,10 +2,15 @@ const { EmbedBuilder, Collection, PermissionsBitField } = require('discord.js');
 const ms = require('ms');
 const client = require('..');
 const config = require('../config.json');
+const {blacklistedmessage} = require('../messages.json')
 
 const cooldown = new Collection();
+const blacklist = require('../models/userBlacklist')
 
 client.on('interactionCreate', async interaction => {
+	blacklist.findOne({ ID: interaction.user.id}, async (err, data) => {
+		if (err) throw err
+		if (!data) {
 	const slashCommand = client.slashCommands.get(interaction.commandName);
 		if (interaction.type == 4) {
 			if(slashCommand.autocomplete) {
@@ -61,4 +66,9 @@ client.on('interactionCreate', async interaction => {
 		} catch (error) {
 				console.log(error);
 		}
-});
+} else {
+	const blist = new EmbedBuilder()
+    .setDescription(blacklistedmessage)
+    interaction.reply({ embeds: [blist] })
+  
+}})})
