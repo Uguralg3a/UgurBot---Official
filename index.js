@@ -1,7 +1,6 @@
 const fs = require('fs');
 const { Client, GatewayIntentBits, Partials, Collection, EmbedBuilder, ActionRowBuilder, ButtonBuilder, Message } = require('discord.js');
 const { GiveawaysManager } = require('discord-giveaways')
-const dash = require(`./dashboard/settings.json`);
 
 require('dotenv').config() 
 
@@ -41,8 +40,5 @@ fs.readdirSync('./handlers').forEach((handler) => {
   require(`./handlers/${handler}`)(client)
 });
 
-client.on("ready", () => {
-	require("./dashboard/index.js")(client);
- })
 
 client.login(process.env.TOKEN)
