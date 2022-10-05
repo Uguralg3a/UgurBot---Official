@@ -15,7 +15,8 @@ module.exports= {
             .setTitle(content[0].data.children[0].data.title)
             .setImage(content[0].data.children[0].data.url)
             .setDescription(`👍 ${content[0].data.children[0].data.ups} 👎 ${content[0].data.children[0].data.downs} | Comments : ${content[0].data.children[0].data.num_comments}`)
-                
+    
+
             interaction.reply({embeds: [embed]})
         })
     }

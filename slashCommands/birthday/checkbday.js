@@ -4,7 +4,7 @@ const {nobirthday, userbirthday} = require("../../messages.json")
 
 
 module.exports = {
-	name: 'checkbday',
+	name: 'checkbirthday',
 	description: "checkbday",
 	type: ApplicationCommandType.ChatInput,
 	cooldown: 3000, 
