@@ -68,5 +68,6 @@
     "blacklistedmessage": "**You are blacklisted from using my commands!**",
     "noremoveblacklistuser": "Please specify someone to remove the blacklist",
     "removedblacklist": "<usertag> has been removed from the blacklist.",
-    "notblacklisted": "<usertag> is not blacklisted."
+    "notblacklisted": "<usertag> is not blacklisted.",
+    "currentgiveawaysmessage": ""
 }

@@ -1,4 +1,5 @@
-const { ApplicationCommandType } = require('discord.js');
+const { ApplicationCommandType,EmbedBuilder } = require('discord.js');
+const color = require("../../color.json")
 
 module.exports = {
 	name: 'test',
@@ -21,6 +22,10 @@ module.exports = {
      */
 	run: async (client, interaction) => {
         const test = interaction.options.getString('test');
-		interaction.reply({ content: `${test}` }) 
+		//interaction.reply({ content: `${test}` }) 
+        const embed = new EmbedBuilder()
+        .setTitle("Test")
+        .setColor(color.DarkNavy)
+        interaction.reply({embeds: [embed]})
 	}
 };

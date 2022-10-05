@@ -15,6 +15,7 @@
     "canvacord": "^5.4.6",
     "canvas": "^2.10.1",
     "chalk": "^4.1.2",
+    "chalk-animation": "^2.0.3",
     "discord-giveaways": "^6.0.1",
     "discord-xp": "^1.1.16",
     "discord.js": "^14.3.0",
