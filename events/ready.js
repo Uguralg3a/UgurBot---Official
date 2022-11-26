@@ -4,7 +4,7 @@ const chalk = require('chalk');
 
 client.on("ready", () => {
 	const activities = [
-		{ name: `${client.guilds.cache.size} / 100 Servers`, type: ActivityType.Listening },
+		{ name: `${client.guilds.cache.size}`, type: ActivityType.Listening },
 		{ name: `${client.channels.cache.size} Channels`, type: ActivityType.Playing },
 		{ name: `${client.users.cache.size} Users`, type: ActivityType.Watching },
 	];
@@ -25,11 +25,4 @@ client.on("ready", () => {
 		s++;
 	}, 30000);
 	console.log(chalk.red(`Logged in as ${client.user.tag}!`))
-	/*client.channels.fetch('1025687275687911526')
-    .then(channel => {
-		const embed = new EmbedBuilder()
-		.setTitle("✅ Bot Started ✅")
-		.setDescription("The Bot is online!")
-        channel.send({embeds: [embed]});
-    })*/
 });
